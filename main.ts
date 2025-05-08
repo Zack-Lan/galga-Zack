@@ -23,15 +23,14 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
     info.changeScoreBy(1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    spacePlane.destroy(effects.spray, 500)
+    otherSprite.destroy()
     scene.cameraShake(4, 500)
     info.changeLifeBy(-1)
 })
 let bogey: Sprite = null
 let projectile2: Sprite = null
 let spacePlane: Sprite = null
-scene.setBackgroundColor(1)
-spacePlane = sprites.createProjectileFromSprite(img`
+spacePlane = sprites.create(img`
     ..ccc.........fffffff...
     ..f4cc.......ffcc22ff...
     ..f44cc...fffccccfff....
@@ -48,7 +47,7 @@ spacePlane = sprites.createProjectileFromSprite(img`
     ...fffffff..............
     ........................
     ........................
-    `, spacePlane, 50, 50)
+    `, SpriteKind.Player)
 controller.moveSprite(spacePlane, 200, 200)
 spacePlane.setStayInScreen(true)
 info.setLife(3)
